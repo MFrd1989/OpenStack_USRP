@@ -59,7 +59,7 @@ if [[ -z "$USRP_NAME" ]]; then echo "Invalid selection."; exit 1; fi
 
 # 4. DEPLOYMENT
 echo ""
-read -p "Enter Worker VM Name: " WORKER_NAME
+read -p "Enter Worker VM Name (vm-[x310,n210]-n[1,2,3]-w[i]-n[1,2,3] :" WORKER_NAME
 GATEWAY_NAME="gateway-${USRP_HOST}-to-${WORKER_NAME}"
 
 # Cleanup logic
