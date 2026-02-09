@@ -1,0 +1,20 @@
+# Get instance ID
+GW_ID=$(openstack server show gateway-mfrd-to-vm-n1-x310-user-1 -f value -c "OS-EXT-SRV-ATTR:instance_name")
+
+# Check current interfaces
+sudo docker exec nova_libvirt virsh domiflist $GW_ID
+
+# Re-attach br-usrp interface
+cat <<'EOF' > /tmp/interface.xml
+<interface type='bridge'>
+  <source bridge='br-usrp'/>
+  <virtualport type='openvswitch'/>
+  <model type='virtio'/>
+</interface>
+EOF
+
+sudo docker cp /tmp/interface.xml nova_libvirt:/tmp/interface.xml
+sudo docker exec nova_libvirt virsh attach-device $GW_ID /tmp/interface.xml --live --config
+
+# Verify
+sudo docker exec nova_libvirt virsh domiflist $GW_ID

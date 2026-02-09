@@ -1,0 +1,9 @@
+# Create the OVS bridge
+sudo ovs-vsctl add-br br-n210
+
+# Add the physical interface to the bridge
+sudo ovs-vsctl add-port br-n210 <PHYSICAL_IFACE>
+
+# Ensure both interfaces are up
+sudo ip link set br-n210 up
+sudo ip link set <PHYSICAL_IFACE> up
