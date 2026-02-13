@@ -20,4 +20,4 @@ IP_of_new_node ansible_user=node4 network_interface=br-ex api_interface=br-ex tu
 - kolla-ansible  bootstrap-servers -i all-in-one --limit IP_of_new_node
 - kolla-ansible  prechecks -i all-in-one --limit IP_of_new_node
 - kolla-ansible  pull -i all-in-one --limit IP_of_new_node
-- kolla-ansible  deploy -i all-in-one --limit IP_of_new_node
+- kolla-ansible  deploy -i all-in-one --limit IP_of_new_node --skip-tags openvswitch
