@@ -1,0 +1,23 @@
+-Edit inventory under compute as
+
+IP_of_new_node ansible_user=node4 network_interface=br-ex api_interface=br-ex tunnel_interface=br-ex enable_iscsid=no neutron_external_interface="eno1,eno2" neutron_bridge_name="br-ex,br-usrp"
+
+- In the new node make it no_password
+- In the new node install the following:
+
+*  curl -fsSL https://get.docker.com -o get-docker.sh
+   sudo sh get-docker.sh
+   sudo usermod -aG docker $USER
+   newgrp docker
+   -- check with docker ps
+
+*  sudo apt install python3-docker
+*  sudo apt install -y openvswitch-switch
+- In the new node configure the netplan
+
+
+
+- kolla-ansible  bootstrap-servers -i all-in-one --limit IP_of_new_node
+- kolla-ansible  prechecks -i all-in-one --limit IP_of_new_node
+- kolla-ansible  pull -i all-in-one --limit IP_of_new_node
+- kolla-ansible  deploy -i all-in-one --limit IP_of_new_node
