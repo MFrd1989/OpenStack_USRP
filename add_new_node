@@ -2,6 +2,11 @@
 
 IP_of_new_node ansible_user=node4 network_interface=br-ex api_interface=br-ex tunnel_interface=br-ex enable_iscsid=no neutron_external_interface="eno1,eno2" neutron_bridge_name="br-ex,br-usrp"
 
+- To test use:
+ansible-inventory -i ~/all-in-one --graph
+ansible -i ~/all-in-one all -m ping
+
+
 - In the new node make it no_password
 - In the new node install the following:
 
@@ -11,7 +16,7 @@ IP_of_new_node ansible_user=node4 network_interface=br-ex api_interface=br-ex tu
    newgrp docker
    -- check with docker ps
 
-*  sudo apt install python3-docker
+*  sudo apt install -y python3-docker
 *  sudo apt install -y openvswitch-switch
 - In the new node configure the netplan
 
